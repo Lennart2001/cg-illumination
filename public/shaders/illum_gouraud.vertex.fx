@@ -28,8 +28,8 @@ out vec3 specular_illum;
 
 void main() {
     // Pass diffuse and specular illumination onto the fragment shader
-    diffuse_illum = vec3(0.0, 0.0, 0.0);
-    specular_illum = vec3(0.0, 0.0, 0.0);
+    diffuse_illum = vec3(light_colors[0] * ((normal-position) * (light_positions[0]-position)));
+    specular_illum = vec3(light_colors[0] * ((camera_position-position) * (2*((normal-position)*(light_positions[0]-position))*(normal-position) + (light_positions[0]-position)))^mat_shininess);
 
     // Pass vertex texcoord onto the fragment shader
     model_uv = uv;

@@ -34,8 +34,8 @@ void main() {
     vec4 world_pos = world * vec4(position, 1.0);
 
     // Pass diffuse and specular illumination onto the fragment shader
-    diffuse_illum = vec3(0.0, 0.0, 0.0);
-    specular_illum = vec3(0.0, 0.0, 0.0);
+    diffuse_illum = vec3(light_colors[0] * (position * (light_positions[0]-position)));
+    specular_illum = vec3(light_colors[0] * ((camera_position-position) * (2*(position*(light_positions[0]-position))*position + (light_positions[0]-position)))^mat_shininess);
 
     // Pass vertex texcoord onto the fragment shader
     model_uv = uv;
