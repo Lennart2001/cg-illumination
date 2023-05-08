@@ -18,7 +18,21 @@ uniform vec3 ambient; // Ia
 out vec4 FragColor;
 
 void main() {
-    vec3 model_color = mat_color * texture(mat_texture, model_uv).rgb;
-    // Color
-    FragColor = vec4(model_color, 1.0);
+    // Uhhhhhhhhh that model color definitionsss yearrr
+    vec3 model_color = mat_color;
+    model_color *= texture(mat_texture, model_uv).rgb;
+
+    // Calculate ambient illumination
+    // Reminds me of that one 'The Weeknd' song:
+    // "To the music of the ambiance, get shit poppin'" - I'm not gonna source this line TAKE THE ROYALTIES I DONT CARE
+    vec3 ambient_illum = ambient * model_color;
+
+    // Combine ambient, diffuse, and specular illumination
+    // Combine me with the uh ambient
+    // The what??! The Diffuse as well
+    // Oh okay! Yeah, alright. Got that Specualr illumaation as wellll
+    vec3 final_color = ambient_illum + diffuse_illum * model_color + specular_illum * mat_specular;
+
+    // Yeerrrr get the color poppin
+    FragColor = vec4(final_color, 1.0);
 }
